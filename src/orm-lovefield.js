@@ -2,14 +2,10 @@
 
 // initialize all variables
 var ORM_lf = {};
-ORM_lf.conection = {};
+ORM_lf.connection = {};
 
 ORM_lf.setConection = function(connection){
     this.connection = Object.create(connection);
-};
-
-ORM_lf.connect = function(thenFunction){
-    return this.connection.connect().then(thenFunction);
 };
 
 /*
