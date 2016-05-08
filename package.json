@@ -10,5 +10,8 @@
     "lovefield"
   ],
   "author": "Julio Cesar Guerra Menendez",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "lovefield": "^2.1.8"
+  }
 }
