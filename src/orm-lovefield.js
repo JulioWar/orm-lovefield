@@ -34,6 +34,12 @@ if(!lf) {
         }
     };
 
+    ORM_lf.Model.extend = function(params){
+        var constructor = function(){};
+        constructor.prototype = ORM_lf.prototype;
+        return constructor;
+    };
+
     ORM_lf.Model.prototype.getSchema = function (query) {
         var self = this;
         var builder = ORM_lf.getConection();
@@ -52,6 +58,25 @@ if(!lf) {
         return this.getSchema(function (db, table) {
             var builder = db.select().from(table);
             return query(db, builder);
+        });
+    };
+
+    ORM_lf.Model.prototype.getAttr = function(name) {
+        return this.getSchema(function (db, table) {
+            return table[name];
+        });
+    };
+
+    ORM_lf.Model.prototype.select = function(selects) {
+        return this.getSchema(function (db, table) {
+            if(Array.isArray(selects) && selects.length > 0) {
+                selects = selects.map(function(item){
+                    return table[item];
+                });
+            } else {
+                selects = []
+            }
+            return db.select.apply(db,selects).from(table);
         });
     };
 
